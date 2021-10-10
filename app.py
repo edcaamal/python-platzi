@@ -1,6 +1,8 @@
 from flask import Flask, redirect, url_for, render_template, request, session
 from flask.helpers import make_response
+# Librerias de BootStrap
 from flask_bootstrap import Bootstrap
+# Librerias de wft
 from flask_wtf import FlaskForm
 from wtforms.fields import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired
