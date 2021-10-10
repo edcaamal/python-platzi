@@ -25,7 +25,7 @@ class LoginForm(FlaskForm):
     password = StringField('Password', validators=[DataRequired()])
     submit = SubmitField('Enviar')
 
-
+# Creando las rutas, a traves de decoradores
 @app.errorhandler(404)
 def not_found(error):
     return render_template('404.html', error=error)
@@ -72,6 +72,6 @@ def home():
 def nosotros():
     return render_template('nosotros.html')
 
-
+# Programa principal
 if __name__ == '__main__':
     app.run(debug=True)
