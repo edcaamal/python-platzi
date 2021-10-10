@@ -19,6 +19,7 @@ app.config['SECRET_KEY'] = 'MY LLAVE SECRETA'
 
 todos = ['Comprar cafe', 'Enviar solicitud de compra', 'Enviar video']
 
+# Creacion de formularios con wtf
 class LoginForm(FlaskForm):
     username = StringField('Nombre del usuario', validators=[DataRequired()])
     password = StringField('Password', validators=[DataRequired()])
