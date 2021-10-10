@@ -4,28 +4,34 @@
 from flask import Flask, redirect, url_for, render_template, request, session
 from flask.helpers import flash, make_response
 # Librerias de BootStrap
-from flask_bootstrap import Bootstrap
-# Librerias de wft
-from flask_wtf import FlaskForm
-from wtforms.fields import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired
+# from flask_bootstrap import Bootstrap
+
 # iportamos libreias de unittest
 import unittest
 
+#importando archivo para crear la app
+from app import create_app
+
+# importanto las formas
+from app.forms import LoginForm
+
+app = create_app()
+
 # Declaracion de la app
-app = Flask (__name__)
-bootstrap = Bootstrap(app)
+#app = Flask (__name__)
+#bootstrap = Bootstrap(app)
 
 # Configurando la llave secreta
-app.config['SECRET_KEY'] = 'MY LLAVE SECRETA'
+#app.config['SECRET_KEY'] = 'MY LLAVE SECRETA'
 
 todos = ['Comprar cafe', 'Enviar solicitud de compra', 'Enviar video']
 
+# Se mueve hacia un archivo denominado forms.py
 # Creacion de formularios con wtf
-class LoginForm(FlaskForm):
-    username = StringField('Nombre del usuario', validators=[DataRequired()])
-    password = StringField('Password', validators=[DataRequired()])
-    submit = SubmitField('Enviar')
+# class LoginForm(FlaskForm):
+#    username = StringField('Nombre del usuario', validators=[DataRequired()])
+#    password = StringField('Password', validators=[DataRequired()])
+#    submit = SubmitField('Enviar')
 
 # Testing
 @app.cli.command()

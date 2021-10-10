@@ -6,7 +6,7 @@ from flask import current_app
 
 # Importacion de nuestra aplicacion from nombde de mi archivo.py 
 # para este ejercicio es app.py
-from app import app
+from main import app
 
 
 class MainTest(TestCase):
@@ -52,4 +52,4 @@ class MainTest(TestCase):
         # Marca ok cuando le ponemos a la misma ruta
         # self.assertRedirects(response, url_for('home'))
         
-        self.assertRedirects(response, url_for('index'))
+        self.assertRedirects(response, url_for('home'))
