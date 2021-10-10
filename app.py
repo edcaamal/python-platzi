@@ -7,10 +7,11 @@ from flask_wtf import FlaskForm
 from wtforms.fields import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired
 
-
+# Declaracion de la app
 app = Flask (__name__)
 bootstrap = Bootstrap(app)
 
+# Configurando la llave secreta
 app.config['SECRET_KEY'] = 'MY LLAVE SECRETA'
 
 todos = ['Comprar cafe', 'Enviar solicitud de compra', 'Enviar video']
