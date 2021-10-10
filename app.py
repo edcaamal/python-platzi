@@ -1,3 +1,6 @@
+# Mi primer proyecto web en python y flask
+# Octubre 2021
+
 from flask import Flask, redirect, url_for, render_template, request, session
 from flask.helpers import make_response
 # Librerias de BootStrap
