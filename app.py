@@ -2,13 +2,15 @@
 # Octubre 2021
 
 from flask import Flask, redirect, url_for, render_template, request, session
-from flask.helpers import make_response
+from flask.helpers import flash, make_response
 # Librerias de BootStrap
 from flask_bootstrap import Bootstrap
 # Librerias de wft
 from flask_wtf import FlaskForm
 from wtforms.fields import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired
+# iportamos libreias de unittest
+import unittest
 
 # Declaracion de la app
 app = Flask (__name__)
@@ -24,6 +26,14 @@ class LoginForm(FlaskForm):
     username = StringField('Nombre del usuario', validators=[DataRequired()])
     password = StringField('Password', validators=[DataRequired()])
     submit = SubmitField('Enviar')
+
+# Testing
+@app.cli.command()
+def test():
+    tests = unittest.TestLoader().discover('tests')
+    unittest.TextTestRunner().run(tests)
+
+
 
 # Creando las rutas, a traves de decoradores
 @app.errorhandler(404)
@@ -62,6 +72,9 @@ def home():
     if login_form.validate_on_submit():
         usuario = login_form.username.data
         session['usuario'] = usuario
+
+        # Creando una alerta con flash
+        flash('Nombre del usuario registrado con exito')
         
         return redirect(url_for('home'))
 
