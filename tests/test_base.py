@@ -53,3 +53,18 @@ class MainTest(TestCase):
         # self.assertRedirects(response, url_for('home'))
         
         self.assertRedirects(response, url_for('home'))
+
+    def test_auth_blueprint_exists(self):
+        self.assertIn('auth', self.app.blueprints)
+
+    def test_auth_login_get(self):
+        # Validar que la vista nos retorna un valor 200, 
+        # el nombre de la funcion debe ser igual a la declarada
+        response = self.client.get(url_for('auth.login'))
+
+        self.assert200(response)
+
+    def test_auth_login_template(self):
+        # Validar que se retorna una vista template a traves de auth
+        self.client.get(url_for('auth.login'))
+        self.assertTemplateUsed('login.html')
