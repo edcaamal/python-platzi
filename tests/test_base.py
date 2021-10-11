@@ -40,19 +40,9 @@ class MainTest(TestCase):
         self.assert200(response)
 
     def test_home_post(self):
-        # Validar que el POST responde de un formulario
-        fake_form = {
-            'username': 'fake',
-            'password': 'fake-password'
-        }
-        response = self.client.post(url_for('home'), data=fake_form)
-        # Marca error con el index
-        #self.assertRedirects(response, url_for('index'))
-
-        # Marca ok cuando le ponemos a la misma ruta
-        # self.assertRedirects(response, url_for('home'))
-        
-        self.assertRedirects(response, url_for('home'))
+        # Codigo para formularios 405
+        response = self.client.post(url_for('home'))
+        self.assertTrue(response.status_code, 405)
 
     def test_auth_blueprint_exists(self):
         self.assertIn('auth', self.app.blueprints)
@@ -61,10 +51,18 @@ class MainTest(TestCase):
         # Validar que la vista nos retorna un valor 200, 
         # el nombre de la funcion debe ser igual a la declarada
         response = self.client.get(url_for('auth.login'))
-
         self.assert200(response)
 
     def test_auth_login_template(self):
         # Validar que se retorna una vista template a traves de auth
         self.client.get(url_for('auth.login'))
         self.assertTemplateUsed('login.html')
+
+    def test_auth_login_post(self):
+        fake_form = {
+            'username': 'fake',
+            'password': 'fake-password'
+        }
+
+        response = self.client.post(url_for('auth.login'), data=fake_form)
+        self.assertRedirects(response, url_for('home'))

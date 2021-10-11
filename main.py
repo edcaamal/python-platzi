@@ -3,8 +3,6 @@
 
 from flask import Flask, redirect, url_for, render_template, request, session
 from flask.helpers import flash, make_response
-# Librerias de BootStrap
-# from flask_bootstrap import Bootstrap
 
 # iportamos libreias de unittest
 import unittest
@@ -26,12 +24,6 @@ app = create_app()
 
 todos = ['Comprar cafe', 'Enviar solicitud de compra', 'Enviar video']
 
-# Se mueve hacia un archivo denominado forms.py
-# Creacion de formularios con wtf
-# class LoginForm(FlaskForm):
-#    username = StringField('Nombre del usuario', validators=[DataRequired()])
-#    password = StringField('Password', validators=[DataRequired()])
-#    submit = SubmitField('Enviar')
 
 # Testing
 @app.cli.command()
@@ -60,31 +52,18 @@ def index():
     # return redirect(url_for('home'))
     return response
 
-@app.route('/home', methods=['GET', 'POST'])
+@app.route('/home', methods=['GET'])
 def home():
-    #usuario = request.cookies.get('usuario')
     usuario = session.get('usuario')
     user_ip = request.remote_addr
     texto = '[-] Con las manos en el <strong>codigo<strong> {}{}'.format(user_ip, usuario)
-    login_form = LoginForm()
     contex = {
         'user_ip': user_ip,
         'todos': todos,
         'usuario': usuario,
-        'texto': texto,
-        'login_form': login_form,
+        'texto': texto
     }
     
-    if login_form.validate_on_submit():
-        usuario = login_form.username.data
-        session['usuario'] = usuario
-
-        # Creando una alerta con flash
-        flash('Nombre del usuario registrado con exito')
-        
-        return redirect(url_for('home'))
-
-
     return render_template('home.html', **contex)
 
 @app.route('/nosotros')
