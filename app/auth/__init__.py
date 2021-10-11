@@ -1,3 +1,5 @@
+# Trabajando con Blueprint
+
 from flask import Blueprint
 
 # Crear la ruta del blueprint, con un prefijo de la ruta
